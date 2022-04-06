@@ -104,4 +104,37 @@ function fetchHouse(id) {
             .then((json) => handleRerender(json))
 }
 
+function handleSubmit(e) {
+    e.preventDefault()
+    if (answer.one === "" || answer.two === "" || answer.three === "" || answer.four === "" || answer.five === "") {
+        console.log(answer)
+    } else {
+        let newArray = []
+        newArray = [answer.one, answer.two, answer.three, answer.four, answer.five]
+        let r = newArray.filter((i) => i === "R")
+        let g = newArray.filter((i) => i === "G")
+        let h = newArray.filter((i) => i === "H")
+        let s = newArray.filter((i) => i === "S")
+        let sorted = hightestCount(r, g, h, s)
+        switch(sorted[0]) {
+            case("R"):
+                fetchHouse(1)
+                break;
+            case("G"):
+                fetchHouse(2)
+                break;
+            case("H"):
+                fetchHouse(3)
+                break;
+            case("S"):
+                fetchHouse(4)
+                break;
+            default:
+                console.log(sorted[0])
+                break;
+        }
+        
+    }    
+}
+
 export default Sorting
