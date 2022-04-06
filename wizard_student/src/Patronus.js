@@ -46,6 +46,14 @@ function Patronus({studentProfile, handleRerender}) {
                     <Card.Body><button onClick={handleClick}>Patronus</button></Card.Body>
                 </Card>)
     }
+
+    function changeDisplay() {
+        if (studentProfile.patronus_animal_id !== null) {
+            return displayPatronus()
+        } else {
+            return displayRandomButton()
+        }
+    }
     
     return (
         <Container style={{ width: '25rem',  }} className="mb-5">
