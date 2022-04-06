@@ -67,6 +67,14 @@ function Sorting({studentProfile, handleRerender}) {
                 </div>)
     }
 
+    function toggleDisplay() {
+        if(studentProfile.house_id !== null) {
+            return buildHouseCard()
+        } else {
+            return displayQuestion(questions)
+        }
+    }
+
     return (
         <Container style={{ width: '25rem',  }} className="mb-5">
             {toggleDisplay()}
