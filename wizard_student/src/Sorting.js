@@ -82,4 +82,11 @@ function Sorting({studentProfile, handleRerender}) {
     )
 }
 
+function hightestCount(r, g, h, s) {
+    let highest = (r.length > g.length ? r : g)
+    let nextHighest = (highest > h ? highest : h)
+    let lastHighest = (nextHighest > s ? nextHighest : s)
+    return lastHighest
+}
+
 export default Sorting
