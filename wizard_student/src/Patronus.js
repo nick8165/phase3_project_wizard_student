@@ -23,6 +23,22 @@ function Patronus({studentProfile, handleRerender}) {
                         </Card>)
             }
     }
+
+    function handleClick() {
+        let num = Math.floor(Math.random() * 19) + 1
+        fetch(`http://localhost:9292/students/${studentProfile.id}`, {
+                method: 'PATCH', 
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify({
+                    house_id: studentProfile.house_id,
+                    patronus_animal_id: num,
+                }),
+            })
+                .then((response) => response.json())
+                .then((json) => handleRerender(json))
+    }
     
     
     
