@@ -24,6 +24,7 @@ function Patronus({studentProfile, handleRerender}) {
             }
     }
 
+    
     function handleClick() {
         let num = Math.floor(Math.random() * 19) + 1
         fetch(`http://localhost:9292/students/${studentProfile.id}`, {
