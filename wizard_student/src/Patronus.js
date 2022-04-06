@@ -5,7 +5,7 @@ import { Container, Card } from "react-bootstrap"
 function Patronus({studentProfile, handleRerender}) {
 
     const [patronus, setPatronus] = useState("")
-
+    
     useEffect(() => {
         fetch('http://localhost:9292/patronus_animals')
             .then(res => res.json())
@@ -39,7 +39,7 @@ function Patronus({studentProfile, handleRerender}) {
                 .then((response) => response.json())
                 .then((json) => handleRerender(json))
     }
-    
+
     function displayRandomButton() {
         return (<Card style={{ width: '20rem',  }} className="mb-5">
                     <Card.Header><h4>Press Button To Retrieve Patronus</h4></Card.Header>
