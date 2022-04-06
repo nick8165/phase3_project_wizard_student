@@ -102,7 +102,7 @@ function Student( {selectedStudent, handleDelete} ) {
                     </Form>
                 </Card.Body>
             </Card>
-            <h2>After Enrolling Or If Already Enrolled, Load Your Profile</h2>
+            <h2>After Enrolling Or If Already Enrolled, Load Your Profil</h2>
             <Card style={{ width: '20rem',  }} className="mb-5">
                 <Card.Header><h4>Load Your Student Profile</h4></Card.Header>
                 <Card.Body>
