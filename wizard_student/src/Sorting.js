@@ -89,4 +89,19 @@ function hightestCount(r, g, h, s) {
     return lastHighest
 }
 
+function fetchHouse(id) {
+    fetch(`http://localhost:9292/students/${studentProfile.id}`, {
+            method: 'PATCH', 
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify({
+                house_id: id,
+                patronus_animal_id: studentProfile.patronus_animal_id
+            }),
+        })
+            .then((response) => response.json())
+            .then((json) => handleRerender(json))
+}
+
 export default Sorting
