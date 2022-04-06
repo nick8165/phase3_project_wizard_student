@@ -33,16 +33,16 @@ function Sorting({studentProfile, handleRerender}) {
       }
 
       function buildHouseCard() {
-        let foundImage = houseImages.filter(img => img.id === studentProfile.house_id)
-        if (foundImage == false) {
-            console.log('empty')
-        } else {
-          return (<Card style={{ width: '20rem',  }} className="mb-5">
-                      <Card.Header><h3>You Belong To House</h3></Card.Header>
-                      <Card.Body><h4>{foundImage[0].house}</h4><img src={foundImage[0].img} alt="...Loading" /></Card.Body>
-                  </Card>)
-        }
-    }
+          let foundImage = houseImages.filter(img => img.id === studentProfile.house_id)
+          if (foundImage == false) {
+              console.log('empty')
+          } else {
+            return (<Card style={{ width: '20rem',  }} className="mb-5">
+                        <Card.Header><h3>You Belong To House</h3></Card.Header>
+                        <Card.Body><h4>{foundImage[0].house}</h4><img src={foundImage[0].img} alt="...Loading" /></Card.Body>
+                    </Card>)
+          }
+      }
 
     function displayQuestion(questions) {
         let newArray = [...questions]
@@ -75,66 +75,66 @@ function Sorting({studentProfile, handleRerender}) {
         }
     }
 
+    function hightestCount(r, g, h, s) {
+        let highest = (r.length > g.length ? r : g)
+        let nextHighest = (highest > h ? highest : h)
+        let lastHighest = (nextHighest > s ? nextHighest : s)
+        return lastHighest
+    }
+
+    function fetchHouse(id) {
+        fetch(`http://localhost:9292/students/${studentProfile.id}`, {
+                method: 'PATCH', 
+                headers: {
+                    'Content-type': 'application/json',
+                },
+                body: JSON.stringify({
+                    house_id: id,
+                    patronus_animal_id: studentProfile.patronus_animal_id
+                }),
+            })
+                .then((response) => response.json())
+                .then((json) => handleRerender(json))
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault()
+        if (answer.one === "" || answer.two === "" || answer.three === "" || answer.four === "" || answer.five === "") {
+            console.log(answer)
+        } else {
+            let newArray = []
+            newArray = [answer.one, answer.two, answer.three, answer.four, answer.five]
+            let r = newArray.filter((i) => i === "R")
+            let g = newArray.filter((i) => i === "G")
+            let h = newArray.filter((i) => i === "H")
+            let s = newArray.filter((i) => i === "S")
+            let sorted = hightestCount(r, g, h, s)
+            switch(sorted[0]) {
+                case("R"):
+                    fetchHouse(1)
+                    break;
+                case("G"):
+                    fetchHouse(2)
+                    break;
+                case("H"):
+                    fetchHouse(3)
+                    break;
+                case("S"):
+                    fetchHouse(4)
+                    break;
+                default:
+                    console.log(sorted[0])
+                    break;
+            }
+            
+        }    
+    }
+
     return (
         <Container style={{ width: '25rem',  }} className="mb-5">
             {toggleDisplay()}
         </Container>
     )
-}
-
-function hightestCount(r, g, h, s) {
-    let highest = (r.length > g.length ? r : g)
-    let nextHighest = (highest > h ? highest : h)
-    let lastHighest = (nextHighest > s ? nextHighest : s)
-    return lastHighest
-}
-
-function fetchHouse(id) {
-    fetch(`http://localhost:9292/students/${studentProfile.id}`, {
-            method: 'PATCH', 
-            headers: {
-                'Content-type': 'application/json',
-            },
-            body: JSON.stringify({
-                house_id: id,
-                patronus_animal_id: studentProfile.patronus_animal_id
-            }),
-        })
-            .then((response) => response.json())
-            .then((json) => handleRerender(json))
-}
-
-function handleSubmit(e) {
-    e.preventDefault()
-    if (answer.one === "" || answer.two === "" || answer.three === "" || answer.four === "" || answer.five === "") {
-        console.log(answer)
-    } else {
-        let newArray = []
-        newArray = [answer.one, answer.two, answer.three, answer.four, answer.five]
-        let r = newArray.filter((i) => i === "R")
-        let g = newArray.filter((i) => i === "G")
-        let h = newArray.filter((i) => i === "H")
-        let s = newArray.filter((i) => i === "S")
-        let sorted = hightestCount(r, g, h, s)
-        switch(sorted[0]) {
-            case("R"):
-                fetchHouse(1)
-                break;
-            case("G"):
-                fetchHouse(2)
-                break;
-            case("H"):
-                fetchHouse(3)
-                break;
-            case("S"):
-                fetchHouse(4)
-                break;
-            default:
-                console.log(sorted[0])
-                break;
-        }
-        
-    }    
 }
 
 export default Sorting
