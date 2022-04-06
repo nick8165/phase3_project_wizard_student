@@ -44,6 +44,29 @@ function Sorting({studentProfile, handleRerender}) {
         }
     }
 
+    function displayQuestion(questions) {
+        let newArray = [...questions]
+        return (<div>
+                    <h1>Sorting Hat Quiz</h1>
+                    {newArray.map((quest) => {
+                        return (<Card key={quest.id} style={{ width: '20rem',  }} className="mb-5">
+                                    <Card.Header>{quest.question}</Card.Header>
+                                    <Card.Body>
+                                        <Form id={quest.id} className="mb-3" >
+                                            <select onChange={handleOptionChange}>
+                                                <option>select answer</option>
+                                                {quest.answers.map((answer) => {return (<option key={answer.answer} value={answer.score}>{answer.answer}</option>)})}
+                                            </select>    
+                                        </Form>
+                                    </Card.Body>
+                                </Card>
+                                )})}
+                    <Form onSubmit={handleSubmit}>
+                        <input type="submit" />
+                    </Form>    
+                </div>)
+    }
+
     return (
         <Container style={{ width: '25rem',  }} className="mb-5">
             {toggleDisplay()}
