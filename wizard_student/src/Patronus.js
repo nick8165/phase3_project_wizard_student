@@ -24,7 +24,6 @@ function Patronus({studentProfile, handleRerender}) {
             }
     }
 
-    
     function handleClick() {
         let num = Math.floor(Math.random() * 19) + 1
         fetch(`http://localhost:9292/students/${studentProfile.id}`, {
@@ -41,7 +40,12 @@ function Patronus({studentProfile, handleRerender}) {
                 .then((json) => handleRerender(json))
     }
     
-    
+    function displayRandomButton() {
+        return (<Card style={{ width: '20rem',  }} className="mb-5">
+                    <Card.Header><h4>Press Button To Retrieve Patronus</h4></Card.Header>
+                    <Card.Body><button onClick={handleClick}>Patronus</button></Card.Body>
+                </Card>)
+    }
     
     return (
         <Container style={{ width: '25rem',  }} className="mb-5">
