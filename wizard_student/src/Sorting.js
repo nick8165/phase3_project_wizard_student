@@ -37,7 +37,7 @@ function Sorting({studentProfile, handleRerender}) {
           if (foundImage == false) {
               console.log('empty')
           } else {
-            return (<Card style={{ width: '20rem',  }} className="mb-5">
+            return (<Card style={{ width: '25rem',  }} className="mb-5">
                         <Card.Header><h3>You Belong To House</h3></Card.Header>
                         <Card.Body><h4>{foundImage[0].house}</h4><img src={foundImage[0].img} alt="...Loading" /></Card.Body>
                     </Card>)
@@ -126,7 +126,6 @@ function Sorting({studentProfile, handleRerender}) {
                     console.log(sorted[0])
                     break;
             }
-            
         }    
     }
 
