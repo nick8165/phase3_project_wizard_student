@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Form, Card } from "react-bootstrap"
 import { questions } from "./Questions";
-import { houseImages } from "./houseImages";
 
 function Sorting({studentProfile, handleRerender}) {
     
     const [answer, setAnswer] = useState({one: "", two: "", three: "", four: "", five: ""})
+    const [house, setHouse] = useState("")
+
+    useEffect(() => {
+        fetch('http://localhost:9292/houses')
+            .then(res => res.json())
+            .then(json => setHouse(json))
+    }, [])
 
     function handleOptionChange(e) {
         let form = e.target.closest("Form")
@@ -32,16 +38,20 @@ function Sorting({studentProfile, handleRerender}) {
         }
       }
 
-      function buildHouseCard() {
-          let foundImage = houseImages.filter(img => img.id === studentProfile.house_id)
-          if (foundImage == false) {
-              console.log('empty')
-          } else {
-            return (<Card style={{ width: '25rem',  }} className="mb-5">
-                        <Card.Header><h3>You Belong To House</h3></Card.Header>
-                        <Card.Body><h4>{foundImage[0].house}</h4><img src={foundImage[0].img} alt="...Loading" /></Card.Body>
-                    </Card>)
-          }
+    function buildHouseCard() {
+        if (house !== "") {
+            let foundHouse = house.filter(img => img.id === studentProfile.house_id)
+                if (foundHouse == false) {
+                    console.log('empty')
+                } else {
+                    return (<Card style={{ width: '25rem',  }} className="mb-5">
+                                <Card.Header><h3>You Belong To House</h3></Card.Header>
+                                <Card.Body><h4>{foundHouse[0].name}</h4><img src={foundHouse[0].image} alt="...Loading" /></Card.Body>
+                            </Card>)
+                }
+            } else {
+                console.log("")
+            }
       }
 
     function displayQuestion(questions) {
