@@ -13,14 +13,18 @@ function Patronus({studentProfile, handleRerender}) {
     }, [])
 
     function displayPatronus() {
-        let foundPatronus = patronus.find(element => element.id === studentProfile.patronus_animal_id) 
-            if (foundPatronus == false) {
-                console.log('empty')
+        if (patronus !== "") {
+            let foundPatronus = patronus.filter(element => element.id === studentProfile.patronus_animal_id) 
+                if (foundPatronus == false) {
+                    console.log('empty')
+                } else {
+                    return (<Card style={{ width: '25rem',  }} className="mb-5">
+                                <Card.Header><h4>Patronus</h4></Card.Header>
+                                <Card.Body><img src={foundPatronus[0].image} alt="...Loading" /></Card.Body>
+                            </Card>)
+                }
             } else {
-                return (<Card style={{ width: '25rem',  }} className="mb-5">
-                            <Card.Header><h4>Patronus</h4></Card.Header>
-                            <Card.Body><img src={foundPatronus.image} alt="...Loading" /></Card.Body>
-                        </Card>)
+                console.log("")
             }
     }
 
@@ -54,7 +58,7 @@ function Patronus({studentProfile, handleRerender}) {
             return displayRandomButton()
         }
     }
-  
+    
     return (
         <Container style={{ width: '25rem',  }} className="mb-5">
             {changeDisplay()}
