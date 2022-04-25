@@ -13,13 +13,13 @@ function Patronus({studentProfile, handleRerender}) {
     }, [])
 
     function displayPatronus() {
-        let foundPatronus = images.filter((pat) => pat.id === studentProfile.patronus_animal_id) 
+        let foundPatronus = patronus.find(element => element.id === studentProfile.patronus_animal_id) 
             if (foundPatronus == false) {
                 console.log('empty')
             } else {
                 return (<Card style={{ width: '25rem',  }} className="mb-5">
                             <Card.Header><h4>Patronus</h4></Card.Header>
-                            <Card.Body><img src={foundPatronus[0].img} alt="...Loading" /></Card.Body>
+                            <Card.Body><img src={foundPatronus.image} alt="...Loading" /></Card.Body>
                         </Card>)
             }
     }
@@ -54,7 +54,7 @@ function Patronus({studentProfile, handleRerender}) {
             return displayRandomButton()
         }
     }
-    
+  
     return (
         <Container style={{ width: '25rem',  }} className="mb-5">
             {changeDisplay()}
